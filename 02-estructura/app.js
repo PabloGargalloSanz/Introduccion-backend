@@ -1,5 +1,6 @@
 import express from "express";
 import logger from './middlewares/logger.js';
+import mainRouter from './routes/auth.routes.js';
 
 //Se asigna los vlaores del .env, sino el puerto 3000
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,8 @@ app.get("/", (req,res) => {
     });
 })
 
+//Cargar rutas
+app.use('/api', mainRouter);
 
 //Escuchando en el puerto
 app.listen(PORT, () => {
