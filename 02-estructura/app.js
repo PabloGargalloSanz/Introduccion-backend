@@ -1,6 +1,7 @@
 import express from "express";
 
-const PORT = 80;
+//Se asigna los vlaores del .env, sino el puerto 3000
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
