@@ -1,27 +1,30 @@
-import express from "express";
+import express from 'express';
 import logger from './middlewares/logger.js';
-import mainRouter from './routes/auth.routes.js';
+import mainRouter from './routes/index.js';
 
-//Se asigna los vlaores del .env, sino el puerto 3000
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+// Middleware para entender JSON 
 app.use(express.json());
 
-//Middleware de logueo
+// Middleware de logueo
 app.use(logger);
 
-//Endpoint raiz
-app.get("/", (req,res) => {
-    res.send({
-        mensaje: "Hola mundo 2 server"
-    });
-})
+//para enviar los paquetes mediante json
+app.use(express.json());
 
-//Cargar rutas
+//Endpoint raiz
+app.get('/', (req,res) => {
+    res.send({
+        mensaje: "Hola mundodesde mi primer server"
+    })
+});
+
+// Cargar rutas
 app.use('/api', mainRouter);
 
-//Escuchando en el puerto
+// Escuchar en el puerto 80
 app.listen(PORT, () => {
-    console.log("Servidor escuchando " + PORT);
+    console.log('Servidor escuchando en el puerto ' + PORT);
 })
