@@ -30,9 +30,9 @@ export const updateCliente = ( req, res) => {
 
     updateClienteService = (id, data)
     .then((updatedCliente) => {
-        res.status(200).send(updateCliente);
+        res.status(200).send(updatedCliente);
     })
     .catch((error) => {
         res.status(400).send({ error: error.message});
-    })
+    });
 }
