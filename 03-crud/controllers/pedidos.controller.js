@@ -27,3 +27,15 @@ export const createPedido = (req, res) => {
     }
 }
 
+export const updatePedido = (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+
+    updatePedidoService(id, data)
+        .then((updatedPedido) => {
+            res.status(200).send(updatedPedido);
+        })
+        .catch((error) => {
+            res.status(400).send({ error: error.message});
+        })
+}

@@ -15,3 +15,14 @@ export const newPedidoService = async (data) => {
     return result.rows[0];
 }
 
+export const updatePedidoService = async (id, data) => {
+    const {descripcion, cantidad } = data;
+    const result = await pool.query(
+        'UPDATE pedidos Set descripcion = $1, cantidad = $2 WHERE id_cliente =$3 RETURNING *',
+        [descripcion, cantidad, id]
+    )
+    if(result.rows.length === 0 ) {
+        throw new Error('Id_cliente no encontrado');
+    }
+    return result.rows[0];
+}
