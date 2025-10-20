@@ -19,8 +19,8 @@ export const createCliente = (req, res) => {
             .catch((error) => {
                 res.status(400).send({ error: error.message });
             });    
-        } else {
-            res.status(400).send({ error: 'Faltan datos obligatorios' });
+    } else {
+        res.status(400).send({ error: 'Faltan datos obligatorios' });
     }
 }
 
@@ -28,11 +28,11 @@ export const updateCliente = ( req, res) => {
     const id = req.params.id;
     const data = req.body;
 
-    updateClienteService = (id, data)
-    .then((updatedCliente) => {
-        res.status(200).send(updatedCliente);
-    })
-    .catch((error) => {
-        res.status(400).send({ error: error.message});
-    });
+    updateClienteService(id, data)
+        .then((updatedCliente) => {
+            res.status(200).send(updatedCliente);
+        })
+        .catch((error) => {
+            res.status(400).send({ error: error.message});
+        });
 }
