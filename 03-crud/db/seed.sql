@@ -19,3 +19,11 @@ CREATE TABLE pedidos (
 	descripcion TEXT,
 	cantidad INT CHECK (cantidad > 0)
 );
+
+DROP TABLE IF EXISTS logs;
+CREATE TABLE logs (
+	id_log SERIAL PRIMARY KEY,
+	fecha_log DATE NOT NULL,
+	metodo VARCHAR,
+	ip VARCHAR
+);
