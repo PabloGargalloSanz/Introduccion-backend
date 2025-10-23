@@ -24,6 +24,8 @@ DROP TABLE IF EXISTS logs;
 CREATE TABLE logs (
 	id_log SERIAL PRIMARY KEY,
 	fecha_log DATE NOT NULL,
+	hora_log TIME NOT NULL,
 	metodo VARCHAR,
-	ip VARCHAR
+	ip VARCHAR,
+	direccion VARCHAR
 );
