@@ -2,19 +2,25 @@ import fs from 'fs';
 import path from 'path';
 
 const logger = (req, res, next) => {
-    //coge solamente la parte antes de la T, lo de detras es la hora
-    const fecha = new Date().toISOString().split('T')[0];
-    const string = `[${new Date().toISOString()}] ${req.method} - ${req.url} - ${req.ip}`;
+    const today = new Date();
     
-    //proceso actual, directorio y nombre carpeta
-    const direccion = path.join(process.cwd(), 'logs');
-    const nombreArchivo = path.join(direccion, fecha +'.log');
-
+    const string = `[${today.toISOString()}] ${req.method} - ${req.url} - ${req.socket.remoteAddress} `;
     console.log(string);
-    console.log(fecha);
+    
+    //coge solamente la parte antes de la T, lo de detras es la hora
+    const date = today.toISOString().slice(0,10);
 
-    fs.appendFile(nombreArchivo, string + '\n', 
-            (error) => {
+    let logPath = path.resolve('./logs/');
+    
+    if(!fs.existsSync(logPath)) {
+        fs.mkdirSync(logPath);
+    }    
+
+    logPath = path.join(logPath, date + '.log');
+
+    fs.appendFile(logPath, 
+        string + '\n',
+        (error) => {
             if(error) {
                 console.log( error);
             }
