@@ -1,11 +1,6 @@
 import multer from "multer";
 import path from 'path';
 import ENV from './routers/file.router.js';
-import fs from 'fs';
-
-if(!fs.existsSync(ENV.CLOUD_STORAGE_PATH)) {
-    fs.mkdirSync(ENV.CLOUD_STORAGE_PATH, {recursive:true});
-}
 
 const storage = multer.diskStorage({
     //Define el directorio donde se guarde los ficheros

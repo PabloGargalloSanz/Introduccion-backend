@@ -1,11 +1,15 @@
 import express from "express";
+import fs from 'fs';
 import ENV from "./utils/envLoader.js";
-//import fileRouter from "./routers/file.router.js";
+import fileRouter from "./routers/file.router.js";
 
-const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+
+if(!fs.existsSync(ENV.CLOUD_STORAGE_PATH)) {
+    fs.mkdirSync(ENV.CLOUD_STORAGE_PATH, {recursive:true});
+}
 
 app.get("/", (req,res) => {
     res.send({
@@ -13,7 +17,7 @@ app.get("/", (req,res) => {
     });
 });
 
-//app.use('/cloud', fileRouter);
+app.use('/cloud', fileRouter);
 
 
 app.listen(ENV.PORT, () => {
